@@ -17,7 +17,6 @@ class Municipio extends Model
     ];
 
     protected $hidden = ['id_departamento'];
-
     /**
      * Get the user that owns the Municipio
      *
@@ -40,6 +39,6 @@ class Municipio extends Model
 
     public function persona_movimiento(): HasMany
     {
-        return $this->hasMany(Personamovimiento::class);
+        return $this->hasMany(PersonasMovimiento::class);
     }
 }

@@ -11,22 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personamovimientos', function (Blueprint $table) {
+        Schema::create('personas_movimientos', function (Blueprint $table) {
             $table->id();
-
-            //lave foranea de la tabla personas
             $table->unsignedBigInteger('id_persona');
             $table->foreign('id_persona')->references('id')->on('personas');
-            //llave foranea para movimientos
             $table->unsignedBigInteger('id_movimiento');
             $table->foreign('id_movimiento')->references('id')->on('movimientos');
-            //llave foranea de la tabla tipoCandidato
             $table->unsignedBigInteger('id_tipo_candidato');
-            $table->foreign('id_tipo_candidato')->references('id')->on('tipocandidatos');     
-            //lave foranea para departamentos
+            $table->foreign('id_tipo_candidato')->references('id')->on('tipo_candidatos');
             $table->unsignedBigInteger('id_departamento');
             $table->foreign('id_departamento')->references('id')->on('departamentos');
-            //llave foranea para municipios
             $table->unsignedBigInteger('id_municipio');
             $table->foreign('id_municipio')->references('id')->on('municipios');
             $table->string('num_planilla');
@@ -39,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personamovimientos');
+        Schema::dropIfExists('personas_movimientos');
     }
 };
