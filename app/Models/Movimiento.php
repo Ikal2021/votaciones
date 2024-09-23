@@ -10,11 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Movimiento extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'id_partido',
-         'nombre'
-    ];
-
+    protected $fillable = ['id_partido', 'nombre'];
     protected $hidden = ['id_partido'];
 
     /**
@@ -27,8 +23,13 @@ class Movimiento extends Model
         return $this->belongsTo(Partido::class);
     }
 
+    /**
+     * Get all of the comments for the Movimiento
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function persona_movimiento(): HasMany
     {
-        return $this->hasMany(Personamovimiento::class);
+        return $this->hasMany(PersonasMovimiento::class);
     }
 }

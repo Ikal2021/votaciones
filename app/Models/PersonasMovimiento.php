@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Personamovimiento extends Model
+class PersonasMovimiento extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -28,7 +28,7 @@ class Personamovimiento extends Model
     ];
 
     /**
-     * Get the user that owns the Personamovimiento
+     * Get the persona that owns the PersonasMovimiento
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -44,7 +44,7 @@ class Personamovimiento extends Model
 
     public function tipo_candidato(): BelongsTo
     {
-        return $this->belongsTo(Tipocandidato::class);
+        return $this->belongsTo(TipoCandidato::class);
     }
 
     public function departamento(): BelongsTo
@@ -58,7 +58,7 @@ class Personamovimiento extends Model
     }
 
     /**
-     * Get all of the comments for the Personamovimiento
+     * Get all of the comments for the PersonasMovimiento
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

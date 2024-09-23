@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('centro_votacions', function (Blueprint $table) {
+        Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
-            //llave foranea de la tabla aldea
-            $table->unsignedBigInteger('id_aldea');
-            $table->foreign('id_aldea')->references('id')->on('aldeas');
-            $table->string('codigo_centro');
-            $table->string('nombre_centro');
+            $table->string('codigo');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('centro_votacions');
+        Schema::dropIfExists('departamentos');
     }
 };

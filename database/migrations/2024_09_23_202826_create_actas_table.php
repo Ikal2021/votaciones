@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('actas', function (Blueprint $table) {
             $table->id();
-            //llave foranea de la tabla centros
             $table->unsignedBigInteger('id_centro_votacion');
             $table->foreign('id_centro_votacion')->references('id')->on('centro_votacions');
             $table->integer('votos_nulos');
             $table->integer('votos_en_blanco');
-            $table->integer('votos_totales');//votos procesados
             $table->integer('total_votos');
+            $table->integer('total_validos');
+            $table->dateTime('fecha_acta_procesada');
             $table->timestamps();
         });
     }

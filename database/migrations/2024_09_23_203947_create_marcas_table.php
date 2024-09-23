@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('marcas', function (Blueprint $table) {
             $table->id();
-
-            //llave foranea de la tabla personamovimientos
-            $table->unsignedBigInteger('id_persona_por_movimiento');
-            $table->foreign('id_persona_por_movimiento')->references('id')->on('personamovimientos');
-            //llave foranea tabla actas
             $table->unsignedBigInteger('id_acta');
             $table->foreign('id_acta')->references('id')->on('actas');
+            $table->unsignedBigInteger('id_persona_movimiento');
+            $table->foreign('id_persona_movimiento')->references('id')->on('personas_movimientos');
             $table->integer('cantidad');
             $table->timestamps();
         });
