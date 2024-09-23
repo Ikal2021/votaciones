@@ -10,28 +10,25 @@ class Marca extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_persona_por_movimiento',
         'id_acta',
-        'cantidad'
+        'id_persona_movimiento',
+        'cantidad',
     ];
 
-    protected $hidden = [
-        'id_persona_por_movimiento',
-        'id_acta'
-    ];
+    protected $hidden = ['id_acta', 'id_persona_movimiento'];
 
     /**
      * Get the user that owns the Marca
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function persona_movimiento(): BelongsTo
+    {
+        return $this->belongsTo(PersonasMovimiento::class);
+    }
+
     public function acta(): BelongsTo
     {
         return $this->belongsTo(Acta::class);
-    }
-
-    public function persona_movimiento(): BelongsTo
-    {
-        return $this->belongsTo(Personamovimiento::class);
     }
 }

@@ -33,7 +33,7 @@ class Aldea extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function centroVotacion(): HasMany
+    public function centro_votacion(): HasMany
     {
         return $this->hasMany(CentroVotacion::class);
     }
