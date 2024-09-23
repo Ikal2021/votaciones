@@ -9,13 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Persona extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $fillable =[
         'dni',
         'nombres',
         'apellidos',
         'genero',
-        'fecha_nacimiento',
-        'estado'
+        'fecha_nacimiento'
     ];
 
     /**
@@ -25,6 +24,6 @@ class Persona extends Model
      */
     public function persona_movimiento(): HasMany
     {
-        return $this->hasMany(Personamovimiento::class);
+        return $this->hasMany(PersonasMovimiento::class);
     }
 }

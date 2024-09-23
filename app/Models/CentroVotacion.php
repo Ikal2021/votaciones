@@ -12,8 +12,8 @@ class CentroVotacion extends Model
     use HasFactory;
     protected $fillable = [
         'id_aldea',
-        'codigo_centro',
-        'nombre_centro'
+        'codigo',
+        'nombre'
     ];
 
     protected $hidden = ['id_aldea'];
@@ -33,8 +33,8 @@ class CentroVotacion extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function acta(): HasMany
+    public function centro_votacion(): HasMany
     {
-        return $this->hasMany(Acta::class);
+        return $this->hasMany(CentroVotacion::class);
     }
 }

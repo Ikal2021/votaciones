@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personas', function (Blueprint $table) {
+        Schema::create('centro_votacions', function (Blueprint $table) {
             $table->id();
-            $table->string('dni');
-            $table->string('nombres');
-            $table->string('apellidos');
-            $table->string('genero');
-            $table->string('fecha_nacimiento');
-            $table->string('estado')->nullable();
+            $table->unsignedBigInteger('id_aldea');
+            $table->foreign('id_aldea')->references('id')->on('aldeas');
+            $table->string('codigo');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personas');
+        Schema::dropIfExists('centro_votacions');
     }
 };
