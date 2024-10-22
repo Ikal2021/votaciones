@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h1 class="text-l text-purple-800">BIENVENIDO AL REGISTRO DE CANDIDATOS</h1>
-                    <p>Te has logueado como :  {{$usuario->name}}</p>
+                    <p>Te has logueado como :  {{$usuario->usuario}}</p>
                     <br>
                     @livewire('candidate-component')
                 </div>

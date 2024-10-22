@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,10 @@ new #[Layout('layouts.guest')] class extends Component
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
-
+    public string $usuario = '';
+    public string $tipo_usuario = '';
+    public string $descripcion_usuario = '';
+    public int $id_rol;
     /**
      * Handle an incoming registration request.
      */
@@ -23,11 +27,24 @@ new #[Layout('layouts.guest')] class extends Component
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'usuario' => ['required', 'string', 'max:255'],
+            'tipo_usuario' => ['required', 'string'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $validated['password'] = Hash::make($validated['password']);
+        if($validated['tipo_usuario'] === 'Administrador')
+        {
+            $validated['id_rol'] = 1;
+            $validated['descripcion_usuario'] = 'Acceso total al sistema';
+        }
 
+        else {
+            $validated['id_rol'] = 2;
+            $validated['descripcion_usuario'] = 'Solo digitalizará conteo de votos';
+
+        }
+
+        $validated['password'] = Hash::make($validated['password']);    
         event(new Registered($user = User::create($validated)));
 
         Auth::login($user);
@@ -47,9 +64,26 @@ new #[Layout('layouts.guest')] class extends Component
 
         <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Correl Electrónico')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
+            <x-input-label for="email" :value="__('Correo Electrónico')" />
+            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+         <!-- Usuario -->
+         <div  class="mt-4">
+            <x-input-label for="usuario" :value="__('Nombre de Usuario')" />
+            <x-text-input wire:model="usuario" id="usuario" class="block mt-1 w-full" type="text" name="usuario" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('usuario')" class="mt-2" />
+        </div>
+
+        {{-- Tipo Usuario --}}
+        <div class="mt-4">
+            <x-input-label for="tipo_usuario" value="{{ __('Tipo usuario') }}" />
+            <select name="tipo_usuario" class="block mt-1 w-full" id="tipo_usuario" wire:model="tipo_usuario" required>
+                <option value="" disabled selected>Seleccione el tipo de usuario</option>  
+                <option value="Administrador">Administrador</option>
+                <option value="Digitalizador">Digitalizador</option>
+            </select>
         </div>
 
         <!-- Password -->
