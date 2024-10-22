@@ -22,6 +22,10 @@ class User extends Authenticatable
         // 'id_rol',
         'name',
         'email',
+        'usuario',
+        'id_rol',
+        'tipo_usuario',
+        'descripcion_usuario',
         'password'
     ];
 
@@ -31,9 +35,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'id_rol',
         'password',
         'remember_token',
+        'id_rol'
     ];
 
     /**
@@ -47,15 +51,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    /**
-     * Get the user associated with the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function rol(): HasOne
-    {
-        return $this->hasOne(Rol::class);
     }
 }

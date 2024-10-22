@@ -1,5 +1,5 @@
 <div>
-    <button class="bg-violet-700 text-white px-2 py-2 rounded-md hover:bg-purple-500 my-6" wire:click=openCreateModal>
+    <button class="bg-violet-700 text-white px-2 py-2 rounded-md hover:bg-purple-500 my-6" wire:navigate href="/nuevoCandidato">
         Nuevo Candidato
     </button>
 

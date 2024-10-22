@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('apellidos');
             $table->string('genero');
             $table->date('fecha_nacimiento');
+            $table->string('lugar_nacimiento');
             $table->timestamps();
         });
     }
