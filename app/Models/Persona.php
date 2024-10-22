@@ -14,7 +14,8 @@ class Persona extends Model
         'nombres',
         'apellidos',
         'genero',
-        'fecha_nacimiento'
+        'fecha_nacimiento',
+        'lugar_nacimiento'
     ];
 
     /**
