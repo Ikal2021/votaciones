@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Movimiento extends Model
 {
     use HasFactory;
-    protected $fillable = ['id_partido', 'nombre'];
+    protected $fillable = ['id_partido', 'nombre_movimiento'];
     protected $hidden = ['id_partido'];
 
     /**

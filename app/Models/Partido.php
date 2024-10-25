@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Partido extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre_partido'];
 
     /**
      * Get all of the comments for the Partido
@@ -19,5 +19,10 @@ class Partido extends Model
     public function movimiento(): HasMany
     {
         return $this->hasMany(Movimiento::class);
+    }
+
+    public function persona_movimiento(): HasMany
+    {
+        return $this->hasMany(PersonasMovimiento::class);
     }
 }
