@@ -12,8 +12,8 @@ class Aldea extends Model
     use HasFactory;
     protected $fillable = [
         'id_municipio',
-        'codigo',
-        'nombre'
+        'codigo_aldea',
+        'nombre_aldea'
     ];
 
     protected $hidden = ['id_municipio'];

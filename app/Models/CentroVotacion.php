@@ -12,8 +12,8 @@ class CentroVotacion extends Model
     use HasFactory;
     protected $fillable = [
         'id_aldea',
-        'codigo',
-        'nombre'
+        'codigo_centro',
+        'nombre_centro'
     ];
 
     protected $hidden = ['id_aldea'];

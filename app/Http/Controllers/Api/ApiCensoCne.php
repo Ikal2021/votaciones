@@ -40,7 +40,11 @@ class ApiCensoCne extends Controller
             'status' => 200
         ];
 
-        return response()->json($data, 200);
+       for($i = 0; $i < count($this->datosCandidato); $i ++){
+            $res = $this->datosCandidato[$i];
+       }
+
+        return response()->json( $res->apellidos, 200);
 
     }
 }
