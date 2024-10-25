@@ -12,6 +12,7 @@ class PersonasMovimiento extends Model
     use HasFactory;
     protected $fillable = [
         'id_persona',
+        'id_partido',
         'id_movimiento',
         'id_tipo_candidato',
         'id_departamento',
@@ -21,6 +22,7 @@ class PersonasMovimiento extends Model
 
     protected $hidden = [
         'id_persona',
+        'id_partido',
         'id_movimiento',
         'id_tipo_candidato',
         'id_departamento',
@@ -35,6 +37,11 @@ class PersonasMovimiento extends Model
     public function persona(): BelongsTo
     {
         return $this->belongsTo(Persona::class);
+    }
+
+    public function partido(): BelongsTo
+    {
+        return $this->belongsTo(Partido::class);
     }
 
     public function movimiento(): BelongsTo
