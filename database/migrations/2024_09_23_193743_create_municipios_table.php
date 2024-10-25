@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_departamento');
             $table->foreign('id_departamento')->references('id')->on('departamentos');
-            $table->string('codigo');
-            $table->string('nombre');
+            $table->string('codigo_municipio');
+            $table->string('nombre_municipio');
             $table->timestamps();
         });
     }

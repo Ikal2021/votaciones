@@ -10,8 +10,8 @@ class Departamento extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'codigo',
-        'nombre'
+        'codigo_departamento',
+        'nombre_departamento'
     ];
 
     /**
