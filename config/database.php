@@ -97,6 +97,21 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        // 'pgsql' => [
+        //     'driver' => 'pgsql',
+        //     'url' => env('DB_URL'),
+        //     'host' => env('a', '186.2.148.92'),
+        //     'port' => env('a', '5432'),
+        //     'database' => env('a', 'bd_cne_2021'),
+        //     'username' => env('a', 'postgres'),
+        //     'password' => env('a', 'p0stgr3sq1.2022'),
+        //     'charset' => env('a', 'utf8'),
+        //     'prefix' => '',
+        //     'prefix_indexes' => true,
+        //     'search_path' => 'public',
+        //     'sslmode' => 'prefer',
+        // ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),
