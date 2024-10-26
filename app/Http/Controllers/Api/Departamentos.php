@@ -18,7 +18,7 @@ class Departamentos extends Controller
     public $departamentos, $municipios, $aldeas;
 
     public function getDepartamentos(){
-        $this->departamentos = DB::table('departamentos')->select('codigo', 'nombre')->get();//notacion tabla
+        $this->departamentos = DB::table('departamentos')->select('codigo_departamento', 'nombre_departamento')->get();//notacion tabla
         // $this->departamentos = Departamento::select('id', 'nombre')->get(); // notacion de modelos
         if($this->departamentos->isEmpty()){
             $data = [
@@ -39,8 +39,9 @@ class Departamentos extends Controller
     }
 
     public function getMunicipios(){
-        $this->municipios = DB::select('select mun.codigo AS codigoMun, mun.nombre AS nombreMun,
-                        dp.codigo AS codigoDep, dp.nombre AS deptoPerteneciente from municipios as mun
+        $this->municipios = DB::select('select mun.codigo_municipio AS codigoMun, mun.nombre_municipio
+                        AS nombreMun, dp.codigo_departamento AS codigoDep, dp.nombre_departamento
+                        AS deptoPerteneciente from municipios as mun
                         INNER JOIN departamentos AS dp on(mun.id_departamento = dp.id)');
 
         if(!$this->municipios){
@@ -63,9 +64,10 @@ class Departamentos extends Controller
     }
 
     public function getAldeas(){
-        $this->aldeas = DB::select('select aldea.codigo AS codigoAldea, aldea.nombre AS nombreAldea,
-                mun.codigo AS codigoMuni, mun.nombre AS municipioPerteneciente, dp.codigo As codigoDepto,
-                dp.nombre AS deptoPerteneciente from aldeas as aldea
+        $this->aldeas = DB::select('select aldea.codigo_aldea AS codigoAldea, aldea.nombre_aldea AS nombreAldea,
+                mun.codigo_municipio AS codigoMuni, mun.nombre_municipio AS municipioPerteneciente,
+                dp.codigo_departamento As codigoDepto,
+                dp.nombre_departamento AS deptoPerteneciente from aldeas as aldea
                 INNER JOIN municipios AS mun on(mun.id = aldea.id_municipio)
                 INNER JOIN departamentos AS dp on(dp.id = mun.id_departamento)');
 

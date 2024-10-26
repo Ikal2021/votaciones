@@ -44,7 +44,7 @@ class ApiCensoCne extends Controller
             $res = $this->datosCandidato[$i];
        }
 
-        return response()->json( $res->apellidos, 200);
+        return response()->json($data, 200);
 
     }
 }
