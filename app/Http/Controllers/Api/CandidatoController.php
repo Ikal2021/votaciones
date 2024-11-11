@@ -43,6 +43,76 @@ class CandidatoController extends Controller
         return $this->datosCandidato;
     }
 
+    //Actualizar Candidato
+    public function actualizarCandidato(Request $request, $id){
+        $candidato = PersonasMovimiento::find($id);
+        // $candidato = PersonasMovimiento::where('id', $id)->where('estatus', 'Activo')->get();
+        if(!$candidato){
+            $data = [
+                'message' => 'No se ha encontrado el candidato o ya fué eliminado',
+                'status' => 404
+            ];
+
+            return response()->json($data, 404);
+        }
+
+        $validarDatos = Validator::make(
+            $request ->all(),
+            [
+                // 'dni' => ['required', 'string', 'max:255'],
+
+                //Campos de tabla personas
+                // 'nombres' => ['required', 'string', 'max:255'],
+                // 'apellidos' => ['required', 'string', 'max:255'],
+                // 'genero' => ['required', 'string'],
+                // 'fecha_nacimiento' => ['required', 'date'],
+                // 'lugar_nacimiento' => ['required', 'string', 'max:255'],
+                // 'password' => ['required'],
+                //Campos de tabla personas
+
+                'nombre_partido' => ['required', 'string', 'max:255'],
+                'nombre_movimiento' => ['required', 'string', 'max:255'],
+                'tipo' => ['required', 'string', 'max:255'], //formula de candidatura
+                'nombre_departamento' => ['required', 'string', 'max:255'],
+                'nombre_municipio' => ['required', 'string', 'max:255'],
+                'num_planilla' => ['required', 'string', 'max:255'],
+            ]
+        );
+
+        if($validarDatos->fails()){
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'error de validacion',
+                    'errors' => $validarDatos->errors()
+                ], 401
+            );
+        }
+
+        //Jalar los campos editados si se requiere del candidato
+        $id_partido = DB::table('partidos')->where('nombre_partido', $request->nombre_partido)->value('id');
+        $id_movimiento = DB::table('movimientos')->where('nombre_movimiento', $request->nombre_movimiento)->value('id');
+        $id_tipo_candidato = DB::table('tipo_candidatos')->where('tipo', $request->tipo)->value('id');
+        $id_departamento = DB::table('departamentos')->where('nombre_departamento', $request->nombre_departamento)->value('id');
+        $id_municipio = DB::table('municipios')->where('nombre_municipio', $request->nombre_municipio)->value('id');
+
+        //Data para el update
+        $candidato->id_partido = $id_partido;
+        $candidato->id_movimiento  = $id_movimiento;
+        $candidato->id_tipo_candidato = $id_tipo_candidato;
+        $candidato->id_departamento = $id_departamento;
+        $candidato->id_municipio = $id_municipio;
+        $candidato->num_planilla = $request->num_planilla;
+
+        $candidato->save();
+        $data = [
+            'message' => 'Candidato actualizado correctamente, sus nuevos datos son:',
+            'Candidato' => $candidato,
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+    }
+
     //Crear el candidato
     public function CrearCandidato(Request $request){
 
@@ -61,7 +131,7 @@ class CandidatoController extends Controller
                 //Campos de tabla personas
 
                 'nombre_partido' => ['required', 'string', 'max:255'],
-                'nombre_movimiento' => ['required', 'string', 'max:255'],
+                'nombre_movimiento' => 'required', 'string', 'max:255',
                 'tipo' => ['required', 'string', 'max:255'], //formula de candidatura
                 'nombre_departamento' => ['required', 'string', 'max:255'],
                 'nombre_municipio' => ['required', 'string', 'max:255'],
@@ -131,7 +201,8 @@ class CandidatoController extends Controller
                 'id_tipo_candidato' => $id_tipo_candidato,
                 'id_departamento' => $id_departamento,
                 'id_municipio' => $id_municipio,
-                'num_planilla' => $request->num_planilla
+                'num_planilla' => $request->num_planilla,
+                'estatus' => 'Activo'
             ];
 
             //insert a la tabla personas_por_movimientos
@@ -161,13 +232,14 @@ class CandidatoController extends Controller
         $candidatos = DB::select("SELECT p.dni, CONCAT_WS(' ',p.nombres, p.apellidos) AS nombres, p.fecha_nacimiento,
                 TIMESTAMPDIFF(YEAR, p.fecha_nacimiento, CURDATE()) AS edad, p.genero AS sexo,
                 pr.nombre_partido, mov.nombre_movimiento, tc.tipo AS candidato_a, dp.nombre_departamento AS departamento,
-                mun.nombre_municipio AS municipio, pxm.num_planilla AS planilla FROM personas AS p
+                mun.nombre_municipio AS municipio, pxm.num_planilla AS planilla, pxm.estatus AS estado FROM personas AS p
                 INNER JOIN PERSONAS_MOVIMIENTOS AS pxm on(pxm.id_persona = p.id)
                 INNER JOIN partidos AS pr on(pxm.id_partido = pr.id)
                 INNER JOIN movimientos AS mov on(pxm.id_movimiento = mov.id)
                 INNER JOIN departamentos AS dp on(pxm.id_departamento = dp.id)
                 INNER JOIN municipios AS mun on(pxm.id_municipio = mun.id)
-                INNER JOIN tipo_candidatos AS tc on(pxm.id_tipo_candidato = tc.id) ");
+                INNER JOIN tipo_candidatos AS tc on(pxm.id_tipo_candidato = tc.id) WHERE pxm.estatus = 'Activo' ");
+
         if(!$candidatos){
             $data = [
                 'message' => 'No hay candidatos que mostrar',
@@ -180,6 +252,41 @@ class CandidatoController extends Controller
         $data = [
             'message' => 'Candidatos a cargo de elección popular : ',
             'data' => $candidatos,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    //Metodo para eliminar candidato
+    public function eliminarCandidato($id){
+        $candidato = PersonasMovimiento::find($id);
+        // $candidato = PersonasMovimiento::where('id', $id)->where('estatus', 'Activo')->get();
+        // $candidato = DB::table('personas_movimientos')->where('id', '=', $id)->where('estatus', '=', 'Activo')->get();
+        // dd($candidato->estatus);
+        if(!$candidato){
+            $data = [
+                'message' => 'No se ha encontrado el candidato',
+                'status' => 404
+            ];
+
+            return response()->json($data, 404);
+        }
+
+        if($candidato->estatus == 'Inactivo'){
+            $data = [
+                'message' => 'El candidato ya esta dado de baja',
+                'status' => 404
+            ];
+
+            return response()->json($data, 404);
+        }
+
+        //Borrando al candidato(darlo de baja)
+        // $candidato->delete();
+        $candidato = DB::table('personas_movimientos')->where('id', $id)->update(['estatus' => 'Inactivo']);
+        $data = [
+            'message' => 'Candidato Dado de baja Exitosamente!!',
             'status' => 200
         ];
 

@@ -11,18 +11,30 @@ class CentroVotacion extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id_departamento',
+        'id_municipio',
         'id_aldea',
         'codigo_centro',
         'nombre_centro'
     ];
 
-    protected $hidden = ['id_aldea'];
+    protected $hidden = ['id_departamento', 'id_municipio', 'id_aldea'];
 
     /**
      * Get the user that owns the CentroVotacion
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function departamento(): BelongsTo
+    {
+        return $this->belongsTo(Departamento::class);
+    }
+
+    public function municipio(): BelongsTo
+    {
+        return $this->belongsTo(Municipio::class);
+    }
+
     public function aldea(): BelongsTo
     {
         return $this->belongsTo(Aldea::class);
@@ -36,5 +48,10 @@ class CentroVotacion extends Model
     public function centro_votacion(): HasMany
     {
         return $this->hasMany(CentroVotacion::class);
+    }
+
+    public function marca(): HasMany
+    {
+        return $this->hasMany(Marca::class);
     }
 }

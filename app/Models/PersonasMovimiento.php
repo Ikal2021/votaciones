@@ -17,7 +17,8 @@ class PersonasMovimiento extends Model
         'id_tipo_candidato',
         'id_departamento',
         'id_municipio',
-        'num_planilla'
+        'num_planilla',
+        'estatus'
     ];
 
     protected $hidden = [
