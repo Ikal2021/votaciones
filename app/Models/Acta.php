@@ -12,6 +12,9 @@ class Acta extends Model
     use HasFactory;
     protected $fillable = [
         'id_centro_votacion',
+        'id_departamento',
+        'id_municipio',
+        'id_aldea',
         'votos_nulos',
         'votos_en_blanco',
         'total_votos',
@@ -19,7 +22,8 @@ class Acta extends Model
         'fecha_acta_procesada'
     ];
 
-    protected $hidden = ['id_centro_votacion'];
+    protected $hidden = ['id_centro_votacion',
+     'id_departamento', 'id_municipio', 'id_aldea'];
 
     /**
      * Get the user that owns the Acta
@@ -29,6 +33,21 @@ class Acta extends Model
     public function centro_votacion(): BelongsTo
     {
         return $this->belongsTo(CentroVotacion::class);
+    }
+
+    public function departamento(): BelongsTo
+    {
+        return $this->belongsTo(Departamento::class);
+    }
+
+    public function municipio(): BelongsTo
+    {
+        return $this->belongsTo(Municipio::class);
+    }
+
+    public function aldea(): BelongsTo
+    {
+        return $this->belongsTo(Aldea::class);
     }
 
     /**

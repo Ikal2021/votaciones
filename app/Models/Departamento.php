@@ -24,6 +24,21 @@ class Departamento extends Model
         return $this->hasMany(Municipio::class);
     }
 
+    public function aldea(): HasMany
+    {
+        return $this->hasMany(Aldea::class);
+    }
+
+    public function centro_votacion(): HasMany
+    {
+        return $this->hasMany(CentroVotacion::class);
+    }
+
+    public function acta(): HasMany
+    {
+        return $this->hasMany(Acta::class);
+    }
+
     public function persona_movimiento(): HasMany
     {
         return $this->hasMany(PersonasMovimiento::class);

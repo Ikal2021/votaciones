@@ -11,11 +11,12 @@ class Marca extends Model
     use HasFactory;
     protected $fillable = [
         'id_acta',
+        'id_centro_votacion',
         'id_persona_movimiento',
         'cantidad',
     ];
 
-    protected $hidden = ['id_acta', 'id_persona_movimiento'];
+    protected $hidden = ['id_acta', 'id_centro_votacion', 'id_persona_movimiento'];
 
     /**
      * Get the user that owns the Marca
@@ -30,5 +31,10 @@ class Marca extends Model
     public function acta(): BelongsTo
     {
         return $this->belongsTo(Acta::class);
+    }
+
+    public function centro_votacion(): BelongsTo
+    {
+        return $this->belongsTo(CentroVotacion::class);
     }
 }
