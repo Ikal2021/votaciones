@@ -37,6 +37,16 @@ class Municipio extends Model
         return $this->hasMany(Aldea::class);
     }
 
+    public function centro_votacion(): HasMany
+    {
+        return $this->hasMany(Aldea::class);
+    }
+
+    public function acta(): HasMany
+    {
+        return $this->hasMany(Aldea::class);
+    }
+
     public function persona_movimiento(): HasMany
     {
         return $this->hasMany(PersonasMovimiento::class);

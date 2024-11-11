@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_persona');
             $table->foreign('id_persona')->references('id')->on('personas');
-
             $table->unsignedBigInteger('id_partido');
             $table->foreign('id_partido')->references('id')->on('partidos');
-
             $table->unsignedBigInteger('id_movimiento');
             $table->foreign('id_movimiento')->references('id')->on('movimientos');
             $table->unsignedBigInteger('id_tipo_candidato');
@@ -28,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_municipio');
             $table->foreign('id_municipio')->references('id')->on('municipios');
             $table->string('num_planilla');
+            $table->string('estatus');
             $table->timestamps();
         });
     }

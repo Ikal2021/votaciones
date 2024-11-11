@@ -30,7 +30,7 @@ Route::get('apiMovimiento', [Partidos::class, 'getMovimientos'])->name('apiMovim
 
 //GET CANDIDATO
 Route::get('apiObtenerCandidato', [CandidatoController::class, 'getCandidatos'])->name('apiObtenerCandidato');
-
-
-
-
+//DELETE CANDIDATO
+Route::delete('/apiEliminarCandidato/{id}', [CandidatoController::class, 'eliminarCandidato']);
+//UPDATE CANDIDATO
+Route::put('/apiActualizarCandidato/{id}', [CandidatoController::class, 'actualizarCandidato']);
