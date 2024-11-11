@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('centro_votacions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_departamento');
+            $table->foreign('id_departamento')->references('id')->on('departamentos');
+            $table->unsignedBigInteger('id_municipio');
+            $table->foreign('id_municipio')->references('id')->on('municipios');
             $table->unsignedBigInteger('id_aldea');
             $table->foreign('id_aldea')->references('id')->on('aldeas');
             $table->string('codigo_centro');

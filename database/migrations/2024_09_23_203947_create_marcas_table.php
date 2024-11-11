@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_acta');
             $table->foreign('id_acta')->references('id')->on('actas');
+            $table->unsignedBigInteger('id_centro_votacion');
+            $table->foreign('id_centro_votacion')->references('id')->on('centro_votacions');
             $table->unsignedBigInteger('id_persona_movimiento');
             $table->foreign('id_persona_movimiento')->references('id')->on('personas_movimientos');
             $table->integer('cantidad');
