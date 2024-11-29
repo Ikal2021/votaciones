@@ -28,9 +28,16 @@ Route::get('apiAldea', [Departamentos::class, 'getAldeas'])->name('apiAldea');
 Route::get('apiPartido', [Partidos::class, 'getPartidos'])->name('apiPartido');
 Route::get('apiMovimiento', [Partidos::class, 'getMovimientos'])->name('apiMovimiento');
 
-//GET CANDIDATO
+//GET CANDIDATO Y FORMULAS
 Route::get('apiObtenerCandidato', [CandidatoController::class, 'getCandidatos'])->name('apiObtenerCandidato');
+Route::get('apiObtenerFormulas', [CandidatoController::class, 'getFormulas'])->name('apiObtenerFormulas');
+
 //DELETE CANDIDATO
 Route::delete('/apiEliminarCandidato/{id}', [CandidatoController::class, 'eliminarCandidato']);
+
 //UPDATE CANDIDATO
 Route::put('/apiActualizarCandidato/{id}', [CandidatoController::class, 'actualizarCandidato']);
+
+//REACTIVAR CANDIDATO DADO DE BAJA
+Route::put('/apiActivarCandidato/{id}', [CandidatoController::class, 'activarCandidato']);
+
