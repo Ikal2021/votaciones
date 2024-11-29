@@ -18,7 +18,7 @@ class Partidos extends Controller
 
     //Metodo para jalar partidos disponibles
     public function getPartidos(){
-        $this->partidos = DB::table('partidos')->select('id', 'nombre_partido')->get();
+        $this->partidos = DB::table('partidos')->select('id as id_partido', 'nombre_partido')->get();
         if($this->partidos->isEmpty()){
             $data = [
                 'message' => 'No hay partidos disponibles',
@@ -42,8 +42,8 @@ class Partidos extends Controller
         // $this->movimientos = DB::table('movimientos')->select('id', 'nombre')->get();
         // $this->movimientos = DB::table('movimientos')->select('id', 'nombre')->get();
 
-        $this->movimientos = DB::select('SELECT mov.id AS idMovimiento, mov.nombre_movimiento
-                AS nombreMovimiento, pr.id AS idPartido, pr.nombre_partido AS partidoPerteneciente
+        $this->movimientos = DB::select('SELECT mov.id AS id_movimiento, mov.nombre_movimiento
+                AS nombreMovimiento, pr.id AS id_partido, pr.nombre_partido AS partidoPerteneciente
                 FROM movimientos AS mov INNER JOIN partidos AS pr ON(pr.id = mov.id_partido)
                 ORDER BY pr.id');
         
