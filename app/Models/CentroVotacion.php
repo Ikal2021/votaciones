@@ -14,11 +14,14 @@ class CentroVotacion extends Model
         'id_departamento',
         'id_municipio',
         'id_aldea',
+        'id_area',
+        'id_lugar_poblado',
         'codigo_centro',
         'nombre_centro'
     ];
 
-    protected $hidden = ['id_departamento', 'id_municipio', 'id_aldea'];
+    protected $hidden = ['id_departamento', 'id_municipio', 'id_aldea', 'id_area',
+     'id_lugar_poblado'];
 
     /**
      * Get the user that owns the CentroVotacion
@@ -40,18 +43,31 @@ class CentroVotacion extends Model
         return $this->belongsTo(Aldea::class);
     }
 
+    public function area(): BelongsTo
+    {
+        return $this->belongsTo(Area::class);
+    }
+
+    public function lugar_poblado(): BelongsTo
+    {
+        return $this->belongsTo(Lugarpoblado::class);
+    }
+
     /**
      * Get all of the comments for the CentroVotacion
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function centro_votacion(): HasMany
-    {
-        return $this->hasMany(CentroVotacion::class);
-    }
 
+     //Relacion uno a muchos
+    public function acta(): HasMany
+    {
+        return $this->hasMany(Acta::class);
+    }
+    
     public function marca(): HasMany
     {
         return $this->hasMany(Marca::class);
     }
 }
+

@@ -23,6 +23,8 @@ class Persona extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    
+    //Relacion uno a muchos
     public function persona_movimiento(): HasMany
     {
         return $this->hasMany(PersonasMovimiento::class);

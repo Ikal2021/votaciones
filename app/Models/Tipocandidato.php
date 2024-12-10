@@ -11,6 +11,7 @@ class TipoCandidato extends Model
     use HasFactory;
     protected $fillable = ['tipo_candidato'];
 
+    //Relacion Uno a Muchos
     public function persona_movimiento(): HasMany
     {
         return $this->hasMany(PersonasMovimiento::class);

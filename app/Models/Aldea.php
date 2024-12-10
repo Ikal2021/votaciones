@@ -40,6 +40,13 @@ class Aldea extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+     //Relacion uno a muchos
+     public function persona_movimiento(): HasMany
+     {
+        return $this->hasMany(PersonasMovimiento::class);
+     }
+
     public function centro_votacion(): HasMany
     {
         return $this->hasMany(CentroVotacion::class);
@@ -48,10 +55,5 @@ class Aldea extends Model
     public function acta(): HasMany
     {
         return $this->hasMany(Acta::class);
-    }
-
-    public function persona_movimiento(): HasMany
-    {
-        return $this->hasMany(PersonasMovimiento::class);
     }
 }

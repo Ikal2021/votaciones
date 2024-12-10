@@ -19,6 +19,8 @@ class Departamento extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+     //Relacio uno a muchos
     public function municipio(): HasMany
     {
         return $this->hasMany(Municipio::class);
@@ -27,6 +29,11 @@ class Departamento extends Model
     public function aldea(): HasMany
     {
         return $this->hasMany(Aldea::class);
+    }
+
+    public function persona_movimiento(): HasMany
+    {
+        return $this->hasMany(PersonasMovimiento::class);
     }
 
     public function centro_votacion(): HasMany
@@ -38,9 +45,5 @@ class Departamento extends Model
     {
         return $this->hasMany(Acta::class);
     }
-
-    public function persona_movimiento(): HasMany
-    {
-        return $this->hasMany(PersonasMovimiento::class);
-    }
 }
+
