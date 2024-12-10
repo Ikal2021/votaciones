@@ -7,38 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Acta extends Model
+class Lugarpoblado extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_centro_votacion',
         'id_departamento',
         'id_municipio',
         'id_aldea',
-        'id_partido',
         'id_area',
-        'id_lugar_poblado',
-        'votos_nulos',
-        'votos_en_blanco',
-        'total_votos',
-        'total_validos',
-        'fecha_acta_procesada',
-        'observaciones'
+        'codigo_lugar_poblado',
+        'nombre_lugar_poblado'
     ];
 
-    protected $hidden = ['id_centro_votacion', 'id_departamento', 'id_municipio',
-     'id_partido', 'id_aldea', 'id_area', 'id_lugar_poblado'];
+    protected $hidden = ['id_departamento', 'id_municipio', 'id_aldea', 'id_area'];
 
     /**
-     * Get the user that owns the Acta
+     * Get the user that owns the CentroVotacion
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function centro_votacion(): BelongsTo
-    {
-        return $this->belongsTo(CentroVotacion::class);
-    }
 
+     //Relacion inversa con sus padres
     public function departamento(): BelongsTo
     {
         return $this->belongsTo(Departamento::class);
@@ -54,28 +43,26 @@ class Acta extends Model
         return $this->belongsTo(Aldea::class);
     }
 
-    public function partido(): BelongsTo
-    {
-        return $this->belongsTo(Partido::class);
-    }
-
     public function area(): BelongsTo
     {
         return $this->belongsTo(Area::class);
     }
 
-    public function lugar_poblado(): BelongsTo
-    {
-        return $this->belongsTo(Lugarpoblado::class);
-    }
-
     /**
-     * Get all of the comments for the Acta
+     * Get all of the comments for the CentroVotacion
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function marca(): HasMany
+
+     //Relacion uno a muchos
+    public function centro_votacion(): HasMany
     {
-        return $this->hasMany(Marca::class);
+        return $this->hasMany(CentroVotacion::class);
+    }
+
+    public function acta(): HasMany
+    {
+        return $this->hasMany(Acta::class);
     }
 }
+

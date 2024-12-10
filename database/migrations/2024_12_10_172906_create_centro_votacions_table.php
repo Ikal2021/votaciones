@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreign('id_municipio')->references('id')->on('municipios');
             $table->unsignedBigInteger('id_aldea');
             $table->foreign('id_aldea')->references('id')->on('aldeas');
+            $table->unsignedBigInteger('id_area');
+            $table->foreign('id_area')->references('id')->on('areas');
+            $table->unsignedBigInteger('id_lugar_poblado');
+            $table->foreign('id_lugar_poblado')->references('id')->on('lugar_poblados');
             $table->string('codigo_centro');
             $table->string('nombre_centro');
             $table->timestamps();
