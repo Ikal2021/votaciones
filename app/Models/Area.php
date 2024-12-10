@@ -6,26 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Partido extends Model
+class Area extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre_partido'];
-
+    protected $fillable =['descripcion_area'];
     /**
-     * Get all of the comments for the Partido
+     * Get all of the comments for the Area
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
      //Relacion uno a muchos
-    public function movimiento(): HasMany
+    public function centro_votacion(): HasMany
     {
-        return $this->hasMany(Movimiento::class);
+        return $this->hasMany(CentroVotacion::class);
     }
 
-    public function persona_movimiento(): HasMany
+    public function lugar_poblado(): HasMany
     {
-        return $this->hasMany(PersonasMovimiento::class);
+        return $this->hasMany(Lugarpoblado::class);
     }
 
     public function acta(): HasMany

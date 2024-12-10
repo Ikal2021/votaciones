@@ -35,6 +35,8 @@ class PersonasMovimiento extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+
+    //Relacion inversa con sus padres
     public function persona(): BelongsTo
     {
         return $this->belongsTo(Persona::class);
@@ -65,11 +67,18 @@ class PersonasMovimiento extends Model
         return $this->belongsTo(Municipio::class);
     }
 
+    public function aldea(): BelongsTo
+    {
+        return $this->belongsTo(Aldea::class);
+    }
+
     /**
      * Get all of the comments for the PersonasMovimiento
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+     //Relacion uno a muchos
     public function marca(): HasMany
     {
         return $this->hasMany(Marca::class);
