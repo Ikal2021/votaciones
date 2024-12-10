@@ -22,6 +22,8 @@ class Municipio extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+
+     //Relacion inversa
     public function departamento(): BelongsTo
     {
         return $this->belongsTo(Departamento::class);
@@ -32,17 +34,9 @@ class Municipio extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+     //Relacion uno a muchos
     public function aldea(): HasMany
-    {
-        return $this->hasMany(Aldea::class);
-    }
-
-    public function centro_votacion(): HasMany
-    {
-        return $this->hasMany(Aldea::class);
-    }
-
-    public function acta(): HasMany
     {
         return $this->hasMany(Aldea::class);
     }
@@ -50,5 +44,15 @@ class Municipio extends Model
     public function persona_movimiento(): HasMany
     {
         return $this->hasMany(PersonasMovimiento::class);
+    }
+
+    public function centro_votacion(): HasMany
+    {
+        return $this->hasMany(CentroVotacion::class);
+    }
+
+    public function acta(): HasMany
+    {
+        return $this->hasMany(Acta::class);
     }
 }
